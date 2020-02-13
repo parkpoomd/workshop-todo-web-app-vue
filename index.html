@@ -27,9 +27,10 @@
         <ul class="list-group mt-2">
             <li v-for="(todo, index) in todos" class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input">{{ todo.text }}
+                    <input v-model="todo.done" type="checkbox" class="form-check-input">
+                    <span v-bind:class="{ 'done': todo.done }">{{ todo.text }}</span>
                 </div>
-                <i v-on:click="deleteTodo(index)" class="fas fa-trash text-secondary"></i>
+                <i v-if="todo.done" v-on:click="deleteTodo(index)" class="fas fa-trash text-secondary"></i>
             </li>
             <li v-if="todos.length === 0" class="list-group-item">
                 <p class="mb-0 text-center">No Todo !!</p>
@@ -46,9 +47,9 @@
         data: {
             todo: '',
             todos: [
-                { done: false, text: 'Clean the kitchen' },
-                { done: false, text: 'Book flights' },
-                { done: false, text: 'Reserach museums' },
+                { done: true, text: 'Clean the kitchen' },
+                { done: true, text: 'Book flights' },
+                { done: true, text: 'Reserach museums' },
                 { done: false, text: 'Walk the dog' },
                 { done: false, text: 'Finish this course!' },
                 { done: false, text: 'Learn Javascript' },
